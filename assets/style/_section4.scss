@@ -1,0 +1,41 @@
+.section4 {
+  position: relative;
+  background-color: $color1;
+  padding-bottom: 160px;
+  z-index: 0;
+
+  .section4-container {
+    margin: 0 auto;
+    min-height: 80vh;
+    width: 80%;
+    background: #f3e0dcda;
+    border-radius: 15px;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    box-shadow: 1px 1px 4px $color5;
+  }
+  .section4-left-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: $color2;
+    border-right: 1px solid $color2;
+    h3 {
+      text-transform: uppercase;
+      border-bottom: 1px solid $color2;
+    }
+
+    div {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  #maCarte {
+    // position: relative;
+    height: auto;
+    // z-index: 10000;
+    border-radius: 0 15px 15px 0;
+  }
+}

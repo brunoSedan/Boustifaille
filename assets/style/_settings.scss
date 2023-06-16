@@ -1,0 +1,52 @@
+@font-face {
+  font-family: "Grotesque";
+  src: url(./assets/font/DarkerGrotesque-VariableFont_wght.ttf);
+}
+
+@font-face {
+  font-family: "Lato-Regular";
+  src: url(./assets/font/Lato-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Lato-bold";
+  src: url(./assets/font/Lato-Bold.ttf);
+}
+
+$font1: Grotesque, cursive;
+$font2: Lato-Regular, cursive;
+$font3: Lato-bold, cursive;
+$color1: #bc4639;
+$color2: #3f0606;
+$color3: #d4a59a;
+$color4: #f3e0dc;
+$color5: #4285f4;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  text-align: center;
+  background-color: $color2;
+  font-family: $font1;
+  color: $color4;
+  width: 80%;
+  margin: 0 auto;
+  border-left: 2px solid $color3;
+  border-right: 2px solid $color3;
+}
+
+li {
+  list-style: none;
+}
+.more {
+  cursor: pointer;
+  font-weight: 700;
+}
+.more:hover {
+  color: $color5;
+  font-weight: 900;
+}

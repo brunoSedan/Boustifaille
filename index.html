@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+  </head>
+  <body>
+    <div class="header">
+      <nav class="header-nav">
+        <ul>
+          <li href="">Intro</li>
+          <li href="">Menu</li>
+          <li href="">Utile</li>
+          <li href="">Reservation</li>
+          <li href="">contact</li>
+        </ul>
+      </nav>
+      <div class="header-container">
+        <h2>Restaurant</h2>
+        <h1>La boustifaille</h1>
+        <p>
+          Lorem, ipsum dolor sit amet <br />consectetur adipisicing elit. Sit,
+        </p>
+      </div>
+    </div>
+
+    <!--------------SECTION 1-------------->
+    <!-- INTRO -->
+    <div class="section1">
+      <div class="section1-container">
+        <div class="section1-left">
+          <div class="section1-left-container">
+            <h2>Presentation</h2>
+            <h3>Lorem ipsum dolor sit amet.</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
+              non consectetur explicabo nisi fuga sed animi! Ipsum ipsam
+              laudantium delectus!
+            </p>
+            <span class="more">En savoir plus</span>
+          </div>
+        </div>
+        <div class="section1-right">
+          <img src="./assets/img/perso.jpg" alt="Cuisinier de boustifaille" />
+        </div>
+      </div>
+    </div>
+
+    <!--------------SECTION 2-------------->
+    <!-- MENU -->
+
+    <div class="section2">
+      <div class="section2-container">
+        <nav class="nav-section2">
+          <div class="menu">Menu</div>
+          <ul>
+            <li class="btnmenu" href="" id="entree">Entrée</li>
+            <li class="btnmenu" href="" id="dessert">Dessert</li>
+            <li class="btnmenu" href="" id="plat">Plat</li>
+          </ul>
+        </nav>
+        <div class="dish-section2" id="dishEntree"></div>
+        <div id="popup-bg"></div>
+      </div>
+    </div>
+    <!--------------SECTION 3-------------->
+    <!-- Buy -->
+    <div class="section3">
+      <div class="section3-container">
+        <div class="section3-container-top">
+          <h2>VOS ACHAT</h2>
+        </div>
+        <div class="section3-container-bottom">
+          <legend>Contenu du panier</legend>
+          <table id="tableau" class="table">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>id</th>
+                <th>Qte</th>
+                <th>Prix unitaire</th>
+                <th>Prix de la ligne</th>
+                <th>Supprimer</th>
+              </tr>
+            </thead>
+          </table>
+          <br /><label>Prix du panier total</label> :
+          <label id="prixTotal"></label>
+          <label id="nbreLignes" hidden>0</label>
+        </div>
+      </div>
+    </div>
+
+    <!--------------SECTION 4-------------->
+    <!-- INFO -->
+
+    <div class="section4">
+      <div class="section4-container">
+        <div class="section4-left-container">
+          <h3>Où sommes Nous?</h3>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            Necessitatibus unde quo non iusto alias debitis illum similique ut
+            sequi repellendus?
+          </p>
+          <span class="more">En savoir plus</span>
+          <h3>Nos horaires</h3>
+          <div>
+            <span>9-14h (for lunch)</span>
+            <span>18-24h (for dinner)</span>
+          </div>
+          <span class="more">En savoir plus</span>
+        </div>
+        <div id="maCarte"></div>
+      </div>
+    </div>
+
+    <!--------------SECTION 5-------------->
+    <!-- RESA -->
+    <div class="section5">
+      <div class="section5-container">
+        <h2>Votre Reservation</h2>
+        <form action="">
+          <div class="pseudo-container">
+            <label for="pseudo">Pseudo</label>
+            <input
+              type="text"
+              autocomplete="off"
+              id="pseudo"
+              class="inputCss"
+            />
+            <span></span>
+          </div>
+          <div class="email-container">
+            <label for="email">Mail</label>
+            <input type="text" autocomplete="off" id="email" class="inputCss" />
+            <span></span>
+          </div>
+          <div class="number-container">
+            <label for="number">Nombre de personne</label>
+            <input
+              type="number"
+              value="1"
+              min="1"
+              max="8"
+              id="number"
+              class="inputCss"
+            />
+          </div>
+          <div class="date-container">
+            <label for="date">Date de reservation</label>
+            <input type="date" required min="" id="date" class="inputCss" />
+          </div>
+          <div class="heure-container">
+            <label for="heure">Heure de la reservation</label>
+            <select
+              class="inputCss"
+              onchange="newHeure()"
+              name="heure"
+              id="heure"
+              placeholder="Heure de réservation"
+            >
+              <option value="11h et 12h">11h-12h</option>
+              <option value="12h et 13h">12h-13h</option>
+              <option value="13h et 14h">13h-14h</option>
+              <option value="18h et 19h">18h-19h</option>
+              <option value="19h et 20h">19h-20h</option>
+              <option value="20h et 21h">20h-21h</option>
+            </select>
+          </div>
+          <div class="confirm-container">
+            <!-- <label for="submit">"" </label> -->
+            <input type="submit" value="Valider la résa" class="inputCss" />
+          </div>
+        </form>
+        <div class="resafinish"></div>
+      </div>
+    </div>
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
