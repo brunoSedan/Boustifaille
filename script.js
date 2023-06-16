@@ -199,8 +199,9 @@ const popUp = () => {
               <p id="nbr">${produitSelect.nbr}</p>
               <h4 id="prix">${produitSelect.prix}</h4>
               <p id="popup-p">${produitSelect.p}</p>
-              <span id="id">${produitSelect.id}</span>
+              <span id="id" hidden>${produitSelect.id}</span>
               <button class="by" onclick="ajouter()">BY</button>
+              <img id=imagemini src="${produitSelect.imageMini}" hidden />
             </div>
           </div>    
       `;
@@ -261,7 +262,8 @@ popUp();
 const byBtn = document.querySelector(".by");
 
 //// Fonction Ligne Panier
-function lignePanier(name, id, nbr, prix) {
+function lignePanier(image, name, id, nbr, prix) {
+  this.imageArticle = image;
   this.idArticle = id;
   this.nameArticle = name;
   this.nbrArticle = nbr;
@@ -279,15 +281,19 @@ function lignePanier(name, id, nbr, prix) {
   this.getId = function () {
     return this.idArticle;
   };
+  this.getImage = function () {
+    return this.imageArticle;
+  };
 }
 
 /// Fonction Panier----------
 function panier() {
   this.liste = [];
-  this.ajouterArticle = function (name, id, nbr, prix) {
+  this.ajouterArticle = function (image, name, id, nbr, prix) {
     var index = this.getArticle(id);
-    console.log(index);
-    if (index == -1) this.liste.push(new lignePanier(name, id, nbr, prix));
+
+    if (index == -1)
+      this.liste.push(new lignePanier(image, name, id, nbr, prix));
     else this.liste[index].ajouterNbr(nbr);
   };
   this.getPrixPanier = function () {
@@ -309,12 +315,15 @@ function panier() {
 
 /// Fonction Ajouter
 function ajouter() {
+  let imageSrc = document.getElementById("imagemini").src;
+  let image = `<img class="imagemini"src="${imageSrc}"/>`;
   let id = parseInt(document.getElementById("id").textContent);
   let name = document.getElementById("name").textContent;
   let nbr = parseInt(document.getElementById("nbr").textContent);
   let prix = parseInt(document.getElementById("prix").textContent);
   let monPanier = new panier();
-  monPanier.ajouterArticle(name, id, nbr, prix);
+  monPanier.ajouterArticle(image, name, id, nbr, prix);
+  console.log(image);
 
   let tableau = document.getElementById("tableau");
   let longueurTab = parseInt(document.getElementById("nbreLignes").innerHTML);
@@ -322,10 +331,11 @@ function ajouter() {
     for (var i = longueurTab; i > 0; i--) {
       monPanier.ajouterArticle(
         tableau.rows[i].cells[0].innerHTML,
-        parseInt(tableau.rows[i].cells[1].innerHTML),
+        tableau.rows[i].cells[1].innerHTML,
         parseInt(tableau.rows[i].cells[2].innerHTML),
         parseInt(tableau.rows[i].cells[3].innerHTML),
-        parseInt(tableau.rows[i].cells[4].innerHTML)
+        parseInt(tableau.rows[i].cells[4].innerHTML),
+        parseInt(tableau.rows[i].cells[5].innerHTML)
       );
 
       tableau.deleteRow(i);
@@ -336,20 +346,28 @@ function ajouter() {
   for (var i = 0; i < longueur; i++) {
     let ligne = monPanier.liste[i];
     let ligneTableau = tableau.insertRow(-1);
+
     let colonne1 = ligneTableau.insertCell(0);
-    colonne1.innerHTML += ligne.getName();
+    colonne1.innerHTML += ligne.getImage();
+
     let colonne2 = ligneTableau.insertCell(1);
-    colonne2.innerHTML += ligne.idArticle;
+    colonne2.innerHTML += ligne.getName();
+
     let colonne3 = ligneTableau.insertCell(2);
-    colonne3.innerHTML += ligne.nbrArticle;
+    colonne3.innerHTML += ligne.idArticle;
 
     let colonne4 = ligneTableau.insertCell(3);
-    colonne4.innerHTML += ligne.prixArticle;
+    colonne4.innerHTML += ligne.nbrArticle;
+
     let colonne5 = ligneTableau.insertCell(4);
-    colonne5.innerHTML += ligne.getPrixLigne();
+    colonne5.innerHTML += ligne.prixArticle;
+
     let colonne6 = ligneTableau.insertCell(5);
-    colonne6.innerHTML +=
-      '<button class="btn btn-primary" type="submit" onclick="supprimer(this.parentNode.parentNode.cells[1].innerHTML)"><span class="glyphicon glyphicon-remove"></span> Retirer</button>';
+    colonne6.innerHTML += ligne.getPrixLigne();
+
+    let colonne7 = ligneTableau.insertCell(6);
+    colonne7.innerHTML +=
+      '<div class="btnPanier"><button class="btnMore" onclick="moreNbr()">+</btn><button class="btn btn-primary" type="submit" onclick="supprimer(this.parentNode.parentNode.parentNode.cells[2].innerHTML)"> Retirer</button><button class="btnless" onclick="lessNbr()">-</btn></div>';
   }
   document.getElementById("prixTotal").innerHTML = monPanier.getPrixPanier();
   document.getElementById("nbreLignes").innerHTML = longueur;
@@ -363,10 +381,11 @@ function supprimer(id) {
     for (var i = longueurTab; i > 0; i--) {
       monPanier.ajouterArticle(
         tableau.rows[i].cells[0].innerHTML,
-        parseInt(tableau.rows[i].cells[1].innerHTML),
+        tableau.rows[i].cells[1].innerHTML,
         parseInt(tableau.rows[i].cells[2].innerHTML),
         parseInt(tableau.rows[i].cells[3].innerHTML),
-        parseInt(tableau.rows[i].cells[4].innerHTML)
+        parseInt(tableau.rows[i].cells[4].innerHTML),
+        parseInt(tableau.rows[i].cells[5].innerHTML)
       );
       tableau.deleteRow(i);
     }
@@ -377,24 +396,33 @@ function supprimer(id) {
   for (var i = 0; i < longueur; i++) {
     let ligne = monPanier.liste[i];
     let ligneTableau = tableau.insertRow(-1);
+
     let colonne1 = ligneTableau.insertCell(0);
-    colonne1.innerHTML += ligne.getName();
+    colonne1.innerHTML += ligne.getImage();
+
     let colonne2 = ligneTableau.insertCell(1);
-    colonne2.innerHTML += ligne.idArticle;
+    colonne2.innerHTML += ligne.getName();
+
     let colonne3 = ligneTableau.insertCell(2);
-    colonne3.innerHTML += ligne.nbrArticle;
+    colonne3.innerHTML += ligne.idArticle;
 
     let colonne4 = ligneTableau.insertCell(3);
-    colonne4.innerHTML += ligne.prixArticle;
+    colonne4.innerHTML += ligne.nbrArticle;
+
     let colonne5 = ligneTableau.insertCell(4);
-    colonne5.innerHTML += ligne.getPrixLigne();
+    colonne5.innerHTML += ligne.prixArticle;
+
     let colonne6 = ligneTableau.insertCell(5);
-    colonne6.innerHTML +=
-      '<button class="btn btn-primary" type="submit" onclick="supprimer(this.parentNode.parentNode.cells[1].innerHTML)"><span class="glyphicon glyphicon-remove"></span> Retirer</button>';
+    colonne6.innerHTML += ligne.getPrixLigne();
+
+    let colonne7 = ligneTableau.insertCell(6);
+    colonne7.innerHTML +=
+      '<div class="btnPanier"><button class="btnMore" onclick="moreNbr()">+</btn><button class="btn btn-primary" type="submit" onclick="supprimer(this.parentNode.parentNode.parentNode.cells[2].innerHTML)">Retirer</button><button class="btnless" onclick="lessNbr()">-</btn></div>';
   }
   document.getElementById("prixTotal").innerHTML = monPanier.getPrixPanier();
   document.getElementById("nbreLignes").innerHTML = longueur;
 }
+// Fonction Ajouter - Retirer un nombre
 
 /// SECTION4 MAP----------------------------------------------------------------------------
 
