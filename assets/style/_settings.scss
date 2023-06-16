@@ -56,3 +56,19 @@ li {
   color: $color5;
   font-weight: 900;
 }
+
+@mixin section {
+  position: relative;
+  background-color: $color1;
+  padding-bottom: 160px;
+}
+
+@mixin container {
+  position: relative;
+  margin: 0 auto;
+  width: 80%;
+
+  background: #f3e0dc9a;
+  border-radius: 15px;
+  box-shadow: 1px 1px 4px $color5;
+}

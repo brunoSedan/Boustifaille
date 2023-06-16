@@ -175,10 +175,8 @@ let dessertData = [
   },
 ];
 let fullData = [...entreeData, ...platData, ...dessertData];
-//----------------POP UP MENU ------------------------
 
-///--------Pop Up-------------PARTIE A REVOIR AVEC METHODE FIND +++ INNER HTML   // const produitSelect = data.find((dish) => dish.h1 === h1Value);
-// console.log(produitSelect);
+//----------------POP UP MENU ------------------------
 
 let popupBg = document.getElementById("popup-bg");
 let popupClose = document.getElementById("popup-close");
@@ -196,9 +194,9 @@ const popUp = () => {
             <img id="popup-img" src="${produitSelect.image}" alt="" />
             <div class="popup-info">
               <h3 id="name">${produitSelect.h1}</h3>
-              <p id="nbr">${produitSelect.nbr}</p>
-              <h4 id="prix">${produitSelect.prix}</h4>
+              <p id="nbr" hidden>${produitSelect.nbr}</p>
               <p id="popup-p">${produitSelect.p}</p>
+              <h4 id="prix">${produitSelect.prix}$</h4>
               <span id="id" hidden>${produitSelect.id}</span>
               <button class="by" onclick="ajouter()">BY</button>
               <img id=imagemini src="${produitSelect.imageMini}" hidden />
@@ -245,9 +243,9 @@ const dishContainer = () => {
     <div class="dishCardRight">
     <h3 class ="dish-h3" id=${dish.h1}>${dish.h1}</h3>
     <p class="dish-p">${dish.p}</p>
-    <p class="qte">${dish.nbr}</p>
-    <h4 class="dish-h4">${dish.prix}</h4>
-    <span class="id">${dish.id}
+    <p class="qte" hidden>${dish.nbr}</p>
+    <h4 class="dish-h4">${dish.prix}$</h4>
+    <span class="id" hidden>${dish.id}</span>
     </div>
     </div>
     `
@@ -258,6 +256,7 @@ const dishContainer = () => {
 dishContainer();
 dishDisplay();
 popUp();
+
 /// SECTION3 ACHAT---------------------------------------------------------------------------------------------------------------
 const byBtn = document.querySelector(".by");
 
