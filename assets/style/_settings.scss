@@ -30,13 +30,19 @@ $color5: #4285f4;
 
 body {
   text-align: center;
-  background-color: $color2;
+  // height: 100vh;
+  background: rgb(63, 6, 6);
   font-family: $font1;
   color: $color4;
   width: 80%;
   margin: 0 auto;
   border-left: 2px solid $color3;
   border-right: 2px solid $color3;
+  transition: 0.2s ease;
+
+  @media screen and (max-width: 850px) {
+    width: 100%;
+  }
 }
 
 li {
