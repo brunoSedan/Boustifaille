@@ -1,19 +1,9 @@
 .section5 {
-  position: relative;
-  background-color: $color1;
-  height: 800px;
+  @include section;
   z-index: 0;
 
   .section5-container {
-    margin: 0 auto;
-    width: 80%;
-    min-height: 80vh;
-    background: #f3e0dcda;
-    border-radius: 15px;
-    color: $color2;
-    // display: grid;
-    // grid-template-columns: 40% 60%;
-    box-shadow: 1px 1px 4px $color5;
+    @include container;
 
     h2 {
       border-radius: 15px 15px 0 0;

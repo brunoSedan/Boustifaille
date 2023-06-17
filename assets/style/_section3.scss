@@ -1,24 +1,22 @@
 .section3 {
-  position: relative;
-  background-color: $color1;
-  padding-bottom: 160px;
+  @include section;
   z-index: 0;
 
   .section3-container {
-    font-size: 1.4rem;
-    margin: 0 auto;
-    min-height: 80vh;
-    width: 80%;
-    background: #f3e0dcda;
-    border-radius: 15px;
+    @include container;
     display: flex;
     flex-direction: column;
     color: $color2;
 
-    box-shadow: 1px 1px 4px $color5;
-  }
+    .section3-container-bottom {
+      #tableau {
+        width: 90%;
+        margin: 0 auto;
 
-  #tableau {
-    width: 100%;
+        .imagemini {
+          border-radius: 500px;
+        }
+      }
+    }
   }
 }
